@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import sg.edu.nus.iss.paf_day26_workshopB.model.Song;
 import sg.edu.nus.iss.paf_day26_workshopB.repository.SongsRepository;
+import static sg.edu.nus.iss.paf_day26_workshopB.repository.Constants.*;
 
 @Service
 public class SongsService {
@@ -30,7 +31,7 @@ public class SongsService {
         for (Document d : songsRaw) {
             
             String trackName = "";
-            Object trackNameObj = d.get("track_name");
+            Object trackNameObj = d.get(F_TRACK_NAME);
 
             if (trackNameObj instanceof Integer) {
                 trackName = String.valueOf(trackNameObj);
@@ -38,7 +39,7 @@ public class SongsService {
                 trackName = (String) trackNameObj;
             }
 
-            String artistName = d.getString("artist(s)_name");
+            String artistName = d.getString(F_ARTISTS_NAME);
             Song song = new Song(trackName, artistName);
             songs.add(song);
         }
